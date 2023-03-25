@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
+const path = require('path');
 
 dotenv.config({ path: './config.env'});
 require('./db/conn');
@@ -13,6 +14,18 @@ app.use(require('./router/auth'));
 
 const PORT = process.env.POST || 5000;
 
+
+
+app.use(express.static(path.join(__dirname, "./client/build/index.html")));
+
+app.get("*", function (req, res){
+    res.sendFile(
+        path.join(__dirname, "./client/build/index.html"),
+        function (err){
+            res.status(500).send(err);
+        }
+    );
+});
 
 //Middelware
 
