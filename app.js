@@ -16,11 +16,11 @@ const PORT = process.env.POST || 5000;
 
 
 
-app.use(express.static(path.join(__dirname, "./client/build/index.html")));
+app.use(express.static(path.join(__dirname, "./my-app/build/index.html")));
 
 app.get("*", function (req, res){
     res.sendFile(
-        path.join(__dirname, "./client/build/index.html"),
+        path.join(__dirname, "./my-app/build/index.html"),
         function (err){
             res.status(500).send(err);
         }
